@@ -5,6 +5,7 @@ from flask_migrate import MigrateCommand
 from app import get_app
 
 app = get_app()
+
 manager = Manager(app)
 manager.add_command('start', Server(host='127.0.0.1', port=9000))
 # 添加迁移的脚本
