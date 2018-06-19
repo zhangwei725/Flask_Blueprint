@@ -3,7 +3,6 @@ import logging
 
 home = Blueprint('home', __name__)
 
-
 def init_home_blue(app):
     app.register_blueprint(home)
 

@@ -10,11 +10,12 @@
 
 
 <body>
+<!-- url_for('search.add',name='xm') -->
+<!--/search/add/xm/-->
 
 <!-- http://127.0.0.1:9000/search/add/xm/-->
 <!-- url_for('search.add',name='xm' ,_external=True) -->
-
-<!--http://127.0.0.1:9000/search/add/?name=xm -->
-<a href="{{ url_for('search.add',_external=True) }}"></a>
+<!-- 反向解析 -->
+<a href="{{ url_for('search.add',name='xm') }}?key=value">添加</a>
 </body>
 </html>

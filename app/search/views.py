@@ -1,10 +1,18 @@
-from flask import render_template, Blueprint, Flask
+from flask import render_template, Blueprint, Flask, request
 
 search = Blueprint('search', __name__)
 
 
-def init_search_blue(app):
+def init_search_blue(app: Flask):
     app.register_blueprint(search, url_prefix='/search')
+
+
+# 注册自定义过滤器
+# app.add_template_filter(add, 'add')
+# 注册自定义过滤器
+# @search.add_app_template_filter('add')
+def add(value, param2, param3):
+    return value + param2 + param3
 
 
 class Shop:
@@ -15,8 +23,29 @@ class Shop:
 
 @search.route('/temp/')
 def temp1():
-    return render_template('/search/search.html', hello='world',
-                           li=['1', 2, 3],
+    shop = Shop(title='手机', name='华为')
+    return render_template('/search/search.html', li=[1, 2, 3],
                            dt={'name': '小明', 'age': 18},
-                           shop=Shop('手机', '华为')
-                           )
+                           shop=shop,
+                           hello='world', )
+
+
+@search.route('/fi/')
+def filter1():
+    return render_template('search/filter.html')
+
+
+@search.route('/ext/')
+def extend():
+    return render_template('extend/extends01.html')
+
+
+@search.route('/for/')
+def url_for():
+    return render_template('search/for.html')
+
+
+# http://127.0.0.1:9000/search/add/xm/
+@search.route('/add/<name>/')
+def add(name):
+    return name
